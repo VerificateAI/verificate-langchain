@@ -8,6 +8,10 @@ pip install verificate-langchain
 
 **25 free validations per machine — no signup, no token.** After that, pass a token (30-day trial, no card: https://verificate.ai/auth/signup).
 
+## Measured
+
+A frontier model asked *"is this OK to merge?"* missed reward-gaming (a test that only does `assert True`) and a hallucinated API in **0 of 6 runs each**. Verificate's gate catches both **6 / 6 — deterministically**, with 0 false positives on clean code. Battle-tested on 2,581 audited validations, including guarding the write-path of a 21M-entity source-cited knowledge base. Full benchmark: https://github.com/Verificate-Dev/verificate-mcp-quickstart/blob/master/COMPARISON.md
+
 ## One-shot check
 
 ```python
