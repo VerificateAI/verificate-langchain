@@ -1,5 +1,8 @@
 # verificate-langchain
 
+[![Verificate Gate](https://img.shields.io/badge/gated%20by-Verificate%20Gate-2ea44f?logo=shield&logoColor=white)](https://github.com/VerificateAI/verificate-gate-action)
+
+
 **A veto gate for AI-written code in LangChain / LangGraph.** Your agent writes code; Verificate runs it through 17 deterministic reality gates (mock/placeholder veto, invented-API checks, false-completion detection) plus a frontier-model review, and can **veto**. An agent that ships confident-but-wrong code loses its user's trust — this is the safety net that keeps it shipping.
 
 ```bash
