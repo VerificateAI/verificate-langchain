@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "verificate-langchain"
-version = "0.1.0"
+version = "0.1.1"
 description = "A veto gate for AI-written code in LangChain / LangGraph — 17 reality gates + frontier review, with veto power. Free to try, no signup."
 readme = "README.md"
 requires-python = ">=3.9"

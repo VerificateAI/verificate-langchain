@@ -26,7 +26,7 @@ import json
 from dataclasses import dataclass, field
 from typing import Any
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 VERIFICATE_MCP_URL = "https://mcp.verificate.ai/mcp"
 
@@ -60,12 +60,46 @@ async def load_verificate_tools(token: str | None = None) -> list:
     return await _client(token).get_tools()
 
 
+def _texts(result: Any) -> list[str]:
+    """Every text payload in a tool result, whatever shape the adapter hands back: a str (adapters
+    <0.2), a list of content-block DICTS (0.3.x: [{'type': 'text', 'text': ...}]), a list of objects
+    with .text, or a (content, artifact) tuple. 0.1.0 only handled str and objects, so on current
+    adapters EVERY verdict — including approvals — came back as "could not parse verdict"."""
+    if isinstance(result, str):
+        return [result]
+    if isinstance(result, tuple) and result:
+        return _texts(result[0])
+    if isinstance(result, dict):
+        return [result["text"]] if isinstance(result.get("text"), str) else []
+    if isinstance(result, (list,)):
+        out: list[str] = []
+        for block in result:
+            out.extend(_texts(block) if isinstance(block, (dict, str, list, tuple))
+                       else ([block.text] if isinstance(getattr(block, "text", None), str) else []))
+        return out
+    text = getattr(result, "text", None) or getattr(result, "content", None)
+    return _texts(text) if text is not None and text is not result else []
+
+
 def _parse(result: Any) -> Verdict:
-    text = result if isinstance(result, str) else getattr(result[0], "text", str(result))
-    try:
-        p = json.loads(text)
-    except Exception:
-        return Verdict(approved=False, findings=["could not parse verdict"], raw={"text": text})
+    p = None
+    for text in _texts(result):                      # the verdict is the first block that is a JSON object
+        try:
+            candidate = json.loads(text)
+        except Exception:
+            continue
+        if isinstance(candidate, dict):
+            p = candidate
+            break
+    if p is None:
+        return Verdict(approved=False, findings=["could not parse verdict"], raw={"text": str(result)[:2000]})
+    if p.get("validation_type") == "quota" or p.get("review_unavailable"):
+        # Not a judgement of the code: the gate refused access (quota / key) or could not complete
+        # the review. Still not approved — but say why, so callers don't "fix" code that is fine.
+        why = "review did not complete — retry" if p.get("review_unavailable") else \
+            str((p.get("suggestions") or p.get("issues") or ["access refused"])[0])
+        return Verdict(approved=False, score=None, findings=["gate unavailable: " + why],
+                       suggestions=list(p.get("suggestions", [])), raw=p)
     return Verdict(
         approved=bool(p.get("valid")),
         score=p.get("score"),
