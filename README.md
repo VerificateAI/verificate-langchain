@@ -9,7 +9,7 @@
 pip install verificate-langchain
 ```
 
-**25 free validations per machine — no signup, no token.** After that, pass a token (30-day trial, no card: https://verificate.ai/auth/signup).
+**100 free validations per machine — no signup, no token.** After that, pass a token (30-day trial, no card: https://verificate.ai/auth/signup).
 
 ## Measured
 
