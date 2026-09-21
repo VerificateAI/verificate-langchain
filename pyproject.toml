@@ -22,8 +22,8 @@ dependencies = ["langchain-mcp-adapters>=0.1.0"]
 
 [project.urls]
 Homepage = "https://verificate.ai/mcp"
-Documentation = "https://github.com/Verificate-Dev/verificate-langchain#readme"
-Source = "https://github.com/Verificate-Dev/verificate-langchain"
+Documentation = "https://github.com/VerificateAI/verificate-langchain#readme"
+Source = "https://github.com/VerificateAI/verificate-langchain"
 
 [tool.setuptools]
 packages = ["verificate_langchain"]

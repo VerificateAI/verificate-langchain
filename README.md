@@ -13,7 +13,7 @@ pip install verificate-langchain
 
 ## Measured
 
-A frontier model asked *"is this OK to merge?"* missed reward-gaming (a test that only does `assert True`) and a hallucinated API in **0 of 6 runs each**. Verificate's gate catches both **6 / 6 — deterministically**, with 0 false positives on clean code. Battle-tested on 2,581 audited validations, including guarding the write-path of a 21M-entity source-cited knowledge base. Full benchmark: https://github.com/Verificate-Dev/verificate-mcp-quickstart/blob/master/COMPARISON.md
+A frontier model asked *"is this OK to merge?"* missed reward-gaming (a test that only does `assert True`) and a hallucinated API in **0 of 6 runs each**. Verificate's gate catches both **6 / 6 — deterministically**, with 0 false positives on clean code. Battle-tested on 2,581 audited validations, including guarding the write-path of a 21M-entity source-cited knowledge base. Full benchmark: https://github.com/VerificateAI/verificate-mcp-quickstart/blob/master/COMPARISON.md
 
 ## One-shot check
 
@@ -61,4 +61,4 @@ agent = create_react_agent(model, tools + your_other_tools)
 
 Read-only: code is analyzed, never executed, never trained on. https://verificate.ai/privacy
 
-Uses the official [`langchain-mcp-adapters`](https://github.com/langchain-ai/langchain-mcp-adapters) against the hosted [Verificate MCP server](https://mcp.verificate.ai/mcp). All clients + one-click installs: https://github.com/Verificate-Dev/verificate-mcp-quickstart
+Uses the official [`langchain-mcp-adapters`](https://github.com/langchain-ai/langchain-mcp-adapters) against the hosted [Verificate MCP server](https://mcp.verificate.ai/mcp). All clients + one-click installs: https://github.com/VerificateAI/verificate-mcp-quickstart
