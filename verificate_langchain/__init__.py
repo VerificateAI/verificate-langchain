@@ -5,7 +5,7 @@ Verificate is the merge gate for AI-written work: 17 deterministic reality gates
 frontier-model review, with veto power. An agent that ships confident-but-wrong
 code loses its user's trust; this is the safety net that keeps it shipping.
 
-No signup: every machine gets 25 free validations. After that, pass a token (30-day
+No signup: every machine gets 100 free validations. After that, pass a token (30-day
 trial at https://verificate.ai/auth/signup).
 
 Quick start:
