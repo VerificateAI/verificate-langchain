@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "verificate-langchain"
 version = "0.1.1"
-description = "A veto gate for AI-written code in LangChain / LangGraph — 17 reality gates + frontier review, with veto power. Free to try, no signup."
+description = "A veto gate for AI-written code in LangChain / LangGraph — deterministic veto checks + a Claude Haiku 5.5 review. Free to try, no signup."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
@@ -22,8 +22,8 @@ dependencies = ["langchain-mcp-adapters>=0.1.0"]
 
 [project.urls]
 Homepage = "https://verificate.ai/mcp"
-Documentation = "https://github.com/Verificate-Dev/verificate-langchain#readme"
-Source = "https://github.com/Verificate-Dev/verificate-langchain"
+Documentation = "https://github.com/VerificateAI/verificate-langchain#readme"
+Source = "https://github.com/VerificateAI/verificate-langchain"
 
 [tool.setuptools]
 packages = ["verificate_langchain"]
