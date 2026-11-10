@@ -3,7 +3,7 @@
 [![Verificate Gate](https://img.shields.io/badge/gated%20by-Verificate%20Gate-2ea44f?logo=shield&logoColor=white)](https://github.com/VerificateAI/verificate-gate-action)
 
 
-**A veto gate for AI-written code in LangChain / LangGraph.** Your agent writes code; Verificate runs it through 17 deterministic reality gates (mock/placeholder veto, invented-API checks, false-completion detection) plus a frontier-model review, and can **veto**. An agent that ships confident-but-wrong code loses its user's trust — this is the safety net that keeps it shipping.
+**A veto gate for AI-written code in LangChain / LangGraph.** Your agent writes code; Verificate runs it through deterministic veto checks (mocks and placeholders, reward-gamed tests, invented standard-library APIs, secrets in logs, false-completion claims) plus a Claude Haiku 5.5 review, and can **veto**. An agent that ships confident-but-wrong code loses its user's trust — this is the safety net that keeps it shipping.
 
 ```bash
 pip install verificate-langchain
@@ -13,7 +13,13 @@ pip install verificate-langchain
 
 ## Measured
 
-A frontier model asked *"is this OK to merge?"* missed reward-gaming (a test that only does `assert True`) and a hallucinated API in **0 of 6 runs each**. Verificate's gate catches both **6 / 6 — deterministically**, with 0 false positives on clean code. Battle-tested on 2,581 audited validations, including guarding the write-path of a 21M-entity source-cited knowledge base. Full benchmark: https://github.com/VerificateAI/verificate-mcp-quickstart/blob/master/COMPARISON.md
+## New in November 2026
+
+- The model review now runs on **Claude Haiku 5.5**. On our frozen benchmark (12 cases × 3 runs), unsafe approvals fell from 6 in 36 to 0 in 36, with every clean control still approved.
+- New deterministic vetoes: **secrets written to logs** (CWE-532, 10 languages) and **invented Python standard-library calls**.
+- Every verdict carries one final `decision` and a receipt (what was reviewed, which model and prompt version, what was not verified). A review that cannot cover the scope is never an approval.
+
+In September 2026, a frontier model asked *"is this OK to merge?"* missed reward-gaming (a test that only does `assert True`) and a hallucinated API in **0 of 6 runs each**. Verificate's gate caught both **6 / 6** (the reward-gamed test by a deterministic veto, the invented third-party API in the model review), with 0 false positives on clean code. On the November 2026 frozen benchmark, the upgraded Gate cut unsafe approvals from **6 in 36 to 0 in 36**. Benchmarks: https://github.com/VerificateAI/verificate-mcp-quickstart/blob/master/COMPARISON.md · https://github.com/VerificateAI/verificate-mcp-quickstart/blob/master/BENCHMARK_2026-11.md
 
 ## One-shot check
 
